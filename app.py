@@ -12,7 +12,7 @@ goals = st.number_input("Enter Number of Goals:", min_value=0)
 
 if st.button("Get Prediction"):
     # API call
-    response = requests.post("https://your-render-url/predict", json={
+    response = requests.post("https://dbscan.onrender.com/predict", json={
         "current_value": current_value,
         "goals": goals
     })
@@ -20,7 +20,7 @@ if st.button("Get Prediction"):
     st.write(f"The player belongs to Cluster {cluster}")
 
     # Load dataset for scatterplot
-    data = pd.read_csv('players_transfer_data.csv')  # Ensure this file is accessible
+    data = pd.read_csv('./final_data.csv')  
     sns.scatterplot(data=data, x='current_value', y='goals', hue='cluster')
     plt.axhline(y=goals, color='gray', linestyle='--', label='Input Goals')
     plt.axvline(x=current_value, color='gray', linestyle='--', label='Input Current Value')
